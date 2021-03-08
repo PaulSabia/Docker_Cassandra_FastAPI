@@ -21,7 +21,7 @@ Puis éxécuter la commande suivante :
 
 ## Remplissage de la base :
 
-Avant de passer au test de l'API, il faut remplir la base. Pour cela, il faut copier notre fichier `.csv` dans notre conteneur :
+Avant de passer au test de l'API, il faut remplir la base. Pour cela, il faut stopper les conteneur (Ctrl + C) et copier notre fichier `.csv` dans notre conteneur :
 
 * `docker cp db-schema/restaurants.csv cassandra-c01:/restaurants.csv`
 
@@ -38,11 +38,11 @@ L'ensemble des requêtes de création sont regroupées dans le fichier `init.cql
 
 A la création des deux conteneurs Cassandra, une ip propre leur est attribué. Ici : `172.18.0.2` et `172.18.0.3`. 
 
-Pour obtenir l'ip : 
+Pour obtenir l'ip (lorsque les conteneurs sont en marche): 
 
 * `docker exec -it cassandra-c01 nodetool status`
 
-Stopper ensuite les conteneur puis remplacer dans le fichier `api.py`, remplacer les ip à la ligne n° 10 :
+Dans le fichier `api.py`, remplacer les ip à la ligne n° 10 :
 
 * `cls.cluster = cluster.Cluster(['172.18.0.2', '172.18.0.3'], port=9042)`
 
