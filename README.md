@@ -51,3 +51,5 @@ Stopper ensuite les conteneur puis remplacer dans le fichier `api.py`, remplacer
 Relancer les conteneur : `docker-compose up --build` puis se rendre à l'adresse suivante : [http://localhost:8004/docs](http://localhost:8004/docs)
 
 ![](FastAPI.PNG)
+
+![](test_FastAPI.PNG)
