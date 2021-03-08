@@ -1,0 +1,45 @@
+version: "2.2"
+
+services:
+  cassandra-c01:
+    container_name: cassandra-c01
+    image: cassandra
+    environment:
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_CLUSTER_NAME=restaurants
+    volumes:
+      - ./data-cassandra/c1:/var/lib/cassandra/data-cassandra
+    ports:
+      - 9042:9042
+
+
+  cassandra-c02:
+    container_name: cassandra-c02
+    image: cassandra
+    command: /bin/bash -c "sleep 30 && echo && /docker-entrypoint.sh cassandra -f"
+    links:
+      - cassandra-c01:seed
+    environment:
+      - CASSANDRA_START_RPC=true
+      - CASSANDRA_SEEDS=seed
+      - CASSANDRA_CLUSTER_NAME=restaurants
+    volumes:
+      - ./data-cassandra/c2:/var/lib/cassandra/data-cassandra
+    ports:
+      - 9043:9042
+
+
+  api-rest: 
+    build:
+        context: .
+    container_name: api-rest-cassandra
+    ports:
+        - 8004:8000
+    volumes:
+        - ./API:/API
+    command: uvicorn API.api:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    depends_on:
+      - cassandra-c01
+    environment:
+      - ENVIRONMENT=dev
+      - TESTING=0
