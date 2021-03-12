@@ -21,7 +21,6 @@ Puis éxécuter la commande suivante :
 
 ## Remplissage de la base :
 
-Avant de passer au test de l'API, il faut remplir la base. Pour cela, il faut stopper les conteneur (Ctrl + C) et copier notre fichier `.csv` dans notre conteneur :
 
 * `docker cp db-schema/restaurants.csv cassandra-c01:/restaurants.csv`
 
