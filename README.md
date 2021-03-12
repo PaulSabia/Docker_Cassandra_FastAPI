@@ -21,7 +21,6 @@ Puis éxécuter la commande suivante :
 
 ## Remplissage de la base :
 
-
 * `docker cp db-schema/restaurants.csv cassandra-c01:/restaurants.csv`
 
 * `docker cp db-schema/restaurants_inspections.csv cassandra-c01:/restaurants_inspections.csv`
